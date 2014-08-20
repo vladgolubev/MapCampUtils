@@ -1,8 +1,9 @@
 package ua.samosfator.gmm.mapcamp.lviv;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
-import com.google.gdata.data.spreadsheet.*;
-import com.google.gdata.util.PreconditionFailedException;
+import com.google.gdata.data.spreadsheet.ListEntry;
+import com.google.gdata.data.spreadsheet.ListFeed;
+import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.util.ServiceException;
 
 import java.io.IOException;
@@ -13,19 +14,12 @@ import java.util.stream.Collectors;
 
 public class GoogleSheets {
     private SpreadsheetService service;
-    private SpreadsheetEntry spreadsheet;
-    private WorksheetFeed worksheetFeed;
-    private ListFeed listFeed;
-    private WorksheetEntry worksheet;
-    private SpreadsheetFeed feed;
-    private List<WorksheetEntry> worksheets;
-    private List<SpreadsheetEntry> spreadsheets;
-    private URL listFeedUrl;
     private List<ListEntry> entries;
     private ListEntry listEntry;
+    private URL listFeedUrl;
 
-    private String columnName;
     private int rowNumber = Integer.valueOf(String.valueOf(Config.preferences.getInt("fromRange", 0)));
+    private String columnName;
 
     public GoogleSheets() throws IOException, ServiceException {
         columnName = Config.preferences.get("editStatusColumn", "");
@@ -34,7 +28,7 @@ public class GoogleSheets {
         URL metaFeedUrl = new URL(Config.preferences.get("spreadsheetLink", ""));
         SpreadsheetEntry spreadsheet = service.getEntry(metaFeedUrl, SpreadsheetEntry.class);
         listFeedUrl = spreadsheet.getWorksheets().get(0).getListFeedUrl();
-        listFeed = service.getFeed(listFeedUrl, ListFeed.class);
+        ListFeed listFeed = service.getFeed(listFeedUrl, ListFeed.class);
         entries = listFeed.getEntries();
     }
 

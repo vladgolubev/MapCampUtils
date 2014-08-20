@@ -1,10 +1,8 @@
 package ua.samosfator.gmm.mapcamp.lviv.gui;
 
 import com.google.gdata.util.ServiceException;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import ua.samosfator.gmm.mapcamp.lviv.CheckEditStatus;
@@ -37,8 +35,6 @@ public class Controller implements Initializable {
     private TextField fromRange;
     @FXML
     private TextField toRange;
-    @FXML
-    private Button updateStatusButton;
 
     @FXML
     private ProgressBar progressBar;
@@ -61,7 +57,7 @@ public class Controller implements Initializable {
     @FXML
     private void updateStatus() throws IOException, ServiceException {
         try {
-            new CheckEditStatus(editLinkColumn.getText(), editStatusColumn.getText()).setProgressBar(progressBar).check();
+            new CheckEditStatus().check();
         } catch (IOException | ServiceException e) {
             e.printStackTrace();
         }
