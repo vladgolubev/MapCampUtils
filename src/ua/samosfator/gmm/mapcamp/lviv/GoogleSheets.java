@@ -50,6 +50,9 @@ public class GoogleSheets {
         try {
             listEntry.update();
         } catch (Exception e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) { }
             listEntry.update();
         }
         rowNumber++;
