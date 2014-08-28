@@ -51,7 +51,7 @@ public class Controller implements Initializable {
         String editedCsvName = editedCSV.getText();
         Config.preferences.put("originalCSV", originalCsvName);
         Config.preferences.put("editedCSV", editedCsvName);
-        SplitName.split(originalCsvName, editedCsvName);
+        SplitName.splitGasStationsList(originalCsvName, editedCsvName);
     }
 
     @FXML
