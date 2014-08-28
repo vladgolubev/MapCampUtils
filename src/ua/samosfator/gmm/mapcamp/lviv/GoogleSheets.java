@@ -51,9 +51,11 @@ public class GoogleSheets {
             listEntry.update();
         } catch (Exception e) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException ignored) { }
-            listEntry.update();
+            try {
+                listEntry.update();
+            } catch (Exception ignored) { }
         }
         rowNumber++;
     }
